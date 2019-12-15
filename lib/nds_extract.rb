@@ -59,7 +59,7 @@ while index < movies_collection.count do
   array_of_hash << movie_with_director_name(name, movies_collection[index])
   index += 1
 end
-binding.pry
+
 array_of_hash
 end
 
@@ -112,7 +112,7 @@ director_set = [ ]
 index = 0 
 
 while index < source.count do 
-  names = source[index][:names]
+  names = source[index][:name]
   movies = source[index][:movies]
   director_set << movies_with_director_key(names,movies)
 
