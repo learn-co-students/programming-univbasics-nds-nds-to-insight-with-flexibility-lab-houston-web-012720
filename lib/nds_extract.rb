@@ -109,11 +109,6 @@ def movies_with_directors_set(source)
   result
 end
 
-  
-  #[[{:title => "Joes Movie 1", :director_name => "Joe"}, 
-  #  {:title => "Joe's Movie 2", :director_name => "Joe"], 
-  # [{:title => "Bill's Movie 1", :director_name => "Bill"}, 
-  #  {:title => "Bill's Movie 2", :director_name => "Bill"]]
     
     
   
