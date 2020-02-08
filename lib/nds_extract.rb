@@ -1,6 +1,6 @@
 # Provided, don't edit
 require 'directors_database'
-
+require 'pry'
 # A method we're giving you. This "flattens"  Arrays of Arrays so: [[1,2],
 # [3,4,5], [6]] => [1,2,3,4,5,6].
 
@@ -28,12 +28,14 @@ def movie_with_director_name(director_name, movie_data)
     :studio => movie_data[:studio],
     :director_name => director_name
   }
+
 end
 
 
 # Your code after this point
 
 def movies_with_director_key(name, movies_collection)
+  
   # GOAL: For each Hash in an Array (movies_collection), provide a collection
   # of movies and a directors name to the movie_with_director_name method
   # and accumulate the returned Array of movies into a new Array that's
@@ -48,8 +50,18 @@ def movies_with_director_key(name, movies_collection)
   # Array of Hashes where each Hash represents a movie; however, they should all have a
   # :director_name key. This addition can be done by using the provided
   # movie_with_director_name method
+array_of_hash = []
+index = 0 
+
+
+while index < movies_collection.count do 
+  
+  array_of_hash << movie_with_director_name(name, movies_collection[index])
+  index += 1
 end
 
+array_of_hash
+end
 
 def gross_per_studio(collection)
   # GOAL: Given an Array of Hashes where each Hash represents a movie,
@@ -63,6 +75,24 @@ def gross_per_studio(collection)
   #
   # Hash whose keys are the studio names and whose values are the sum
   # total of all the worldwide_gross numbers for every movie in the input Hash
+  
+  studio_gross_total = {}
+  index = 0 
+ 
+  while index < collection.count do 
+    studio_name = collection[index]
+    if studio_gross_total[studio_name[:studio]]
+      studio_gross_total[studio_name[:studio]] += studio_name[:worldwide_gross]
+    else
+      studio_gross_total[studio_name[:studio]] = studio_name[:worldwide_gross]
+    end
+    
+    index += 1
+  end
+    
+  studio_gross_total
+  
+  
 end
 
 def movies_with_directors_set(source)
@@ -76,6 +106,21 @@ def movies_with_directors_set(source)
   #
   # Array of Arrays containing all of a director's movies. Each movie will need
   # to have a :director_name key added to it.
+
+director_set = [ ]
+
+index = 0 
+
+while index < source.count do 
+  names = source[index][:name]
+  movies = source[index][:movies]
+  director_set << movies_with_director_key(names,movies)
+
+  index += 1 
+  
+end
+
+director_set
 end
 
 # ----------------    End of Your Code Region --------------------
@@ -87,3 +132,4 @@ def studios_totals(nds)
   movies_with_director_names = flatten_a_o_a(a_o_a_movies_with_director_names)
   return gross_per_studio(movies_with_director_names)
 end
+
